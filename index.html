@@ -713,6 +713,74 @@
 
 
 
+
+    <!-- Painel Administrativo -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/90 z-[100] overflow-y-auto">
+        <div class="min-h-screen p-4 md:p-8">
+            <div class="max-w-6xl mx-auto bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                <div class="flex justify-between items-center p-6 border-b border-gray-800">
+                    <div>
+                        <p class="text-red-500 text-sm font-semibold tracking-wider">GESTÃO DO CATÁLOGO</p>
+                        <h2 class="text-2xl font-bold text-white">Painel Administrativo</h2>
+                    </div>
+                    <button id="adminClose" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-red-800 text-white"><i class="fas fa-times"></i></button>
+                </div>
+
+                <div id="adminLogin" class="max-w-md mx-auto p-8 md:p-12">
+                    <div class="text-center mb-7">
+                        <div class="w-16 h-16 bg-red-800 rounded-full mx-auto flex items-center justify-center mb-4"><i class="fas fa-user-shield text-2xl"></i></div>
+                        <h3 class="text-xl font-bold text-white">Acesso do proprietário</h3>
+                        <p class="text-gray-500 text-sm mt-2">Na versão comercial, este acesso será individual e protegido por autenticação.</p>
+                    </div>
+                    <input id="adminPassword" type="password" placeholder="Senha da demonstração" class="w-full bg-black border border-gray-700 rounded-xl p-3 text-white mb-3">
+                    <button id="adminLoginBtn" class="w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-3 rounded-xl">Entrar</button>
+                    <p id="adminLoginError" class="hidden text-red-400 text-sm text-center mt-3">Senha incorreta.</p>
+                    <p class="text-gray-600 text-xs text-center mt-4">Demo: senha <strong class="text-gray-400">admin123</strong></p>
+                </div>
+
+                <div id="adminPanel" class="hidden p-6">
+                    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-gray-900 rounded-xl p-5"><p class="text-gray-500 text-sm">Produtos cadastrados</p><strong id="adminProductCount" class="text-3xl text-white">0</strong></div>
+                        <div class="bg-gray-900 rounded-xl p-5"><p class="text-gray-500 text-sm">Disponíveis</p><strong id="adminAvailableCount" class="text-3xl text-green-500">0</strong></div>
+                        <div class="bg-gray-900 rounded-xl p-5"><p class="text-gray-500 text-sm">Em oferta</p><strong id="adminOfferCount" class="text-3xl text-red-500">0</strong></div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-[360px_1fr] gap-8">
+                        <form id="productForm" class="bg-gray-900 rounded-xl p-5 h-fit">
+                            <h3 id="formTitle" class="text-white font-bold text-xl mb-5">Adicionar produto</h3>
+                            <input id="editProductId" type="hidden">
+                            <label class="text-gray-400 text-sm">Nome</label>
+                            <input id="adminName" required class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white mt-1 mb-3" placeholder="Ex.: Contra-filé">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div><label class="text-gray-400 text-sm">Preço</label><input id="adminPrice" required type="number" min="0" step="0.01" class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white mt-1 mb-3" placeholder="49,90"></div>
+                                <div><label class="text-gray-400 text-sm">Unidade</label><select id="adminUnit" class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white mt-1 mb-3"><option>kg</option><option>un</option><option>kit</option><option>bandeja</option></select></div>
+                            </div>
+                            <label class="text-gray-400 text-sm">Categoria</label>
+                            <select id="adminCategory" class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white mt-1 mb-3"><option>Bovinos</option><option>Aves</option><option>Suínos</option><option>Kits</option><option>Outros</option></select>
+                            <label class="text-gray-400 text-sm">Imagem</label>
+                            <select id="adminImage" class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white mt-1 mb-3"><option value="./img5.webp">Carne 1</option><option value="./img4.webp">Carne 2</option><option value="./img2.webp">Carne 3</option><option value="./img1.webp">Carne 4</option><option value="./img6.avif">Frango</option><option value="./img3.webp">Kit</option></select>
+                            <div class="space-y-3 my-4">
+                                <label class="flex items-center gap-3 text-gray-300"><input id="adminAvailable" type="checkbox" checked class="accent-red-700"> Produto disponível</label>
+                                <label class="flex items-center gap-3 text-gray-300"><input id="adminOffer" type="checkbox" class="accent-red-700"> Destacar como oferta</label>
+                            </div>
+                            <button class="w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-3 rounded-xl"><i class="fas fa-save mr-2"></i>Salvar produto</button>
+                            <button id="cancelEdit" type="button" class="hidden w-full mt-2 bg-gray-800 text-gray-300 py-3 rounded-xl">Cancelar edição</button>
+                        </form>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-4"><h3 class="text-white font-bold text-xl">Produtos</h3><button id="resetCatalog" class="text-xs text-gray-500 hover:text-red-400">Restaurar catálogo demo</button></div>
+                            <div id="adminProductList" class="space-y-3"></div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-5 border-t border-gray-800 flex justify-between items-center">
+                        <p class="text-xs text-gray-500">Nesta demonstração, alterações ficam salvas neste navegador.</p>
+                        <button id="adminLogout" class="text-gray-400 hover:text-white"><i class="fas fa-sign-out-alt mr-2"></i>Sair</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- WhatsApp Float Button com Pulso -->
     <a href="https://wa.me/5511999999999?text=Olá%20gostaria%20de%20fazer%20um%20pedido!"
         class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-xl transition-all duration-300 flex items-center justify-center ring-2 ring-white/20 focus:outline-none focus:ring-4 focus:ring-green-300 z-50 animate-pulse"
@@ -724,7 +792,7 @@
 
 
     <script>
-        const products = [
+        const defaultProducts = [
             { id: 1, name: 'Picanha Angus', category: 'Bovinos', price: 89.90, unit: 'kg', image: './img5.webp', badge: 'Mais pedida' },
             { id: 2, name: 'T-Bone Angus', category: 'Bovinos', price: 69.90, unit: 'kg', image: './img4.webp' },
             { id: 3, name: 'Alcatra', category: 'Bovinos', price: 49.90, unit: 'kg', image: './img2.webp' },
@@ -732,7 +800,8 @@
             { id: 5, name: 'Frango temperado', category: 'Aves', price: 24.90, unit: 'un', image: './img6.avif' },
             { id: 6, name: 'Kit Churrasco Família', category: 'Kits', price: 149.90, unit: 'kit', image: './img3.webp', badge: 'Oferta' }
         ];
-
+        let products = JSON.parse(localStorage.getItem('primeCarnesProducts') || 'null') || defaultProducts.map(p => ({...p, available: true}));
+        products = products.map(p => ({ available: p.available !== false, offer: p.offer || p.badge === 'Oferta', ...p }));
         let cart = [];
         let activeCategory = 'Todos';
         const money = value => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -740,6 +809,7 @@
         function renderProducts() {
             const term = document.getElementById('productSearch').value.toLowerCase().trim();
             const filtered = products.filter(p =>
+                p.available !== false &&
                 (activeCategory === 'Todos' || p.category === activeCategory) &&
                 p.name.toLowerCase().includes(term)
             );
@@ -748,7 +818,7 @@
                 <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-red-900 transition">
                     <div class="relative">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-44 object-cover">
-                        ${p.badge ? `<span class="absolute top-3 left-3 bg-red-700 text-white text-xs font-bold px-3 py-1 rounded-full">${p.badge}</span>` : ''}
+                        ${(p.offer || p.badge) ? `<span class="absolute top-3 left-3 bg-red-700 text-white text-xs font-bold px-3 py-1 rounded-full">${p.offer ? 'Oferta' : p.badge}</span>` : ''}
                     </div>
                     <div class="p-5">
                         <p class="text-gray-500 text-xs uppercase tracking-wider">${p.category}</p>
@@ -826,8 +896,129 @@
             nav.classList.toggle('flex');
         });
 
+
+        // Administração do catálogo (demo local)
+        const saveProducts = () => {
+            localStorage.setItem('primeCarnesProducts', JSON.stringify(products));
+            renderProducts();
+            renderAdminProducts();
+        };
+
+        function renderAdminProducts() {
+            const list = document.getElementById('adminProductList');
+            if (!list) return;
+            document.getElementById('adminProductCount').textContent = products.length;
+            document.getElementById('adminAvailableCount').textContent = products.filter(p => p.available !== false).length;
+            document.getElementById('adminOfferCount').textContent = products.filter(p => p.offer).length;
+            list.innerHTML = products.map(p => `
+                <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-4">
+                    <img src="${p.image}" class="w-full sm:w-20 h-20 rounded-lg object-cover" alt="${p.name}">
+                    <div class="flex-1">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            <strong class="text-white">${p.name}</strong>
+                            ${p.available !== false ? '<span class="text-xs bg-green-900 text-green-300 px-2 py-1 rounded">Disponível</span>' : '<span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded">Indisponível</span>'}
+                            ${p.offer ? '<span class="text-xs bg-red-900 text-red-300 px-2 py-1 rounded">Oferta</span>' : ''}
+                        </div>
+                        <p class="text-gray-500 text-sm">${p.category} • ${money(p.price)}/${p.unit}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="editProduct(${p.id})" class="bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg"><i class="fas fa-pen"></i></button>
+                        <button onclick="toggleProduct(${p.id})" class="bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg" title="Disponível/indisponível"><i class="fas fa-eye"></i></button>
+                        <button onclick="deleteProduct(${p.id})" class="bg-red-950 hover:bg-red-900 text-red-300 px-3 py-2 rounded-lg"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function editProduct(id) {
+            const p = products.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('editProductId').value = p.id;
+            document.getElementById('adminName').value = p.name;
+            document.getElementById('adminPrice').value = p.price;
+            document.getElementById('adminUnit').value = p.unit;
+            document.getElementById('adminCategory').value = p.category;
+            document.getElementById('adminImage').value = p.image;
+            document.getElementById('adminAvailable').checked = p.available !== false;
+            document.getElementById('adminOffer').checked = !!p.offer;
+            document.getElementById('formTitle').textContent = 'Editar produto';
+            document.getElementById('cancelEdit').classList.remove('hidden');
+        }
+
+        function resetProductForm() {
+            document.getElementById('productForm').reset();
+            document.getElementById('editProductId').value = '';
+            document.getElementById('adminAvailable').checked = true;
+            document.getElementById('formTitle').textContent = 'Adicionar produto';
+            document.getElementById('cancelEdit').classList.add('hidden');
+        }
+
+        function toggleProduct(id) {
+            const p = products.find(x => x.id === id);
+            if (p) { p.available = p.available === false; saveProducts(); }
+        }
+
+        function deleteProduct(id) {
+            if (!confirm('Excluir este produto do catálogo?')) return;
+            products = products.filter(p => p.id !== id);
+            cart = cart.filter(p => p.id !== id);
+            saveProducts(); renderCart();
+        }
+
+        document.getElementById('productForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const editId = Number(document.getElementById('editProductId').value);
+            const data = {
+                name: document.getElementById('adminName').value.trim(),
+                price: Number(document.getElementById('adminPrice').value),
+                unit: document.getElementById('adminUnit').value,
+                category: document.getElementById('adminCategory').value,
+                image: document.getElementById('adminImage').value,
+                available: document.getElementById('adminAvailable').checked,
+                offer: document.getElementById('adminOffer').checked
+            };
+            if (editId) {
+                const index = products.findIndex(p => p.id === editId);
+                products[index] = { ...products[index], ...data };
+            } else {
+                products.push({ id: Date.now(), ...data });
+            }
+            saveProducts();
+            resetProductForm();
+        });
+
+        document.getElementById('cancelEdit').addEventListener('click', resetProductForm);
+        document.getElementById('resetCatalog').addEventListener('click', () => {
+            if (!confirm('Restaurar o catálogo original da demonstração?')) return;
+            products = defaultProducts.map(p => ({...p, available: true, offer: p.badge === 'Oferta'}));
+            saveProducts(); resetProductForm();
+        });
+
+        const adminModal = document.getElementById('adminModal');
+        document.getElementById('adminOpen').addEventListener('click', () => {
+            adminModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        document.getElementById('adminClose').addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        document.getElementById('adminLoginBtn').addEventListener('click', () => {
+            if (document.getElementById('adminPassword').value === 'admin123') {
+                document.getElementById('adminLogin').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('adminLoginError').classList.add('hidden');
+                renderAdminProducts();
+            } else document.getElementById('adminLoginError').classList.remove('hidden');
+        });
+        document.getElementById('adminLogout').addEventListener('click', () => {
+            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('adminLogin').classList.remove('hidden');
+            document.getElementById('adminPassword').value = '';
+        });
+
         renderProducts();
         renderCart();
+        renderAdminProducts();
     </script>
 </body>
 
