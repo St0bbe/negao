@@ -58,6 +58,7 @@
             <!-- Menu de navegação (visível apenas em telas médias para cima) -->
             <nav class="hidden md:flex space-x-8">
                 <a href="#" class="text-gray-300 hover:text-white transition">Início</a>
+                <a href="#loja" class="text-gray-300 hover:text-white transition">Loja</a>
                 <a href="#cortes" class="text-gray-300 hover:text-white transition">Cortes</a>
                 <a href="#sobre" class="text-gray-300 hover:text-white transition">Sobre</a>
                 <a href="#contato" class="text-gray-300 hover:text-white transition">Contato</a>
@@ -141,6 +142,79 @@
                         em cada produto.
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Loja / Solução de Pedidos -->
+    <section id="loja" class="py-20 bg-gray-950 border-y border-gray-800">
+        <div class="container max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <span class="text-red-500 font-semibold tracking-wider">AÇOUGUE DIGITAL</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 text-white">Monte seu pedido em poucos cliques</h2>
+                <p class="text-gray-400 mt-4 max-w-3xl mx-auto">Escolha os produtos, informe a quantidade e finalize. O pedido chega organizado no WhatsApp do estabelecimento.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
+                <div>
+                    <div class="flex flex-col md:flex-row gap-3 mb-6">
+                        <div class="relative flex-1">
+                            <i class="fas fa-search absolute left-4 top-4 text-gray-500"></i>
+                            <input id="productSearch" type="search" placeholder="Buscar carne, kit, frango..." class="w-full bg-gray-900 border border-gray-700 rounded-xl py-3 pl-11 pr-4 text-white outline-none focus:border-red-600">
+                        </div>
+                        <div id="categoryFilters" class="flex gap-2 flex-wrap">
+                            <button data-category="Todos" class="category-btn bg-red-700 text-white px-4 py-3 rounded-xl">Todos</button>
+                            <button data-category="Bovinos" class="category-btn bg-gray-800 text-gray-200 px-4 py-3 rounded-xl">Bovinos</button>
+                            <button data-category="Aves" class="category-btn bg-gray-800 text-gray-200 px-4 py-3 rounded-xl">Aves</button>
+                            <button data-category="Kits" class="category-btn bg-gray-800 text-gray-200 px-4 py-3 rounded-xl">Kits</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-950/30 border border-red-900/60 rounded-xl p-4 mb-6 flex gap-4 items-center">
+                        <div class="bg-red-700 w-12 h-12 rounded-full flex items-center justify-center"><i class="fas fa-fire text-white"></i></div>
+                        <div><p class="text-red-400 text-sm font-semibold">OFERTA DA SEMANA</p><p class="text-white font-bold">Kit Churrasco Família com condição especial</p><p class="text-gray-400 text-sm">Exemplo demonstrativo — preços e ofertas podem ser atualizados pelo comércio.</p></div>
+                    </div>
+
+                    <div id="storeProducts" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+                    <p id="emptyProducts" class="hidden text-center text-gray-400 py-10">Nenhum produto encontrado.</p>
+                </div>
+
+                <aside class="bg-gray-900 border border-gray-800 rounded-2xl p-6 lg:sticky lg:top-28">
+                    <div class="flex justify-between items-center mb-5">
+                        <div><p class="text-sm text-red-500 font-semibold">SEU PEDIDO</p><h3 class="text-2xl font-bold text-white">Carrinho <span id="cartCount" class="text-red-500">(0)</span></h3></div>
+                        <i class="fas fa-shopping-basket text-3xl text-red-600"></i>
+                    </div>
+                    <div id="cartItems" class="space-y-3 max-h-72 overflow-auto">
+                        <p class="text-gray-500 text-sm">Adicione produtos para montar o pedido.</p>
+                    </div>
+                    <div class="border-t border-gray-700 mt-5 pt-5">
+                        <div class="flex justify-between text-lg mb-5"><span class="text-gray-300">Total estimado</span><strong id="cartTotal" class="text-white">R$ 0,00</strong></div>
+                        <label class="text-sm text-gray-400">Como deseja receber?</label>
+                        <select id="deliveryType" class="w-full mt-2 mb-3 bg-black border border-gray-700 rounded-lg p-3 text-white">
+                            <option>Retirada no balcão</option>
+                            <option>Entrega</option>
+                        </select>
+                        <input id="customerName" placeholder="Seu nome" class="w-full mb-3 bg-black border border-gray-700 rounded-lg p-3 text-white">
+                        <textarea id="orderNotes" placeholder="Observações: corte, horário, endereço..." class="w-full mb-4 bg-black border border-gray-700 rounded-lg p-3 text-white resize-none"></textarea>
+                        <button id="checkoutWhatsapp" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-xl transition disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fab fa-whatsapp mr-2"></i> Finalizar no WhatsApp
+                        </button>
+                        <p class="text-xs text-gray-500 mt-3 text-center">Demonstração: o número é substituído pelo WhatsApp do cliente.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios comerciais -->
+    <section class="py-16 bg-black">
+        <div class="container max-w-7xl mx-auto px-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800"><i class="fas fa-mobile-alt text-red-500 text-2xl mb-4"></i><h3 class="text-white font-bold mb-2">Pedido pelo celular</h3><p class="text-gray-400 text-sm">Cliente escolhe os itens sem precisar perguntar todo o catálogo pelo WhatsApp.</p></div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800"><i class="fas fa-tags text-red-500 text-2xl mb-4"></i><h3 class="text-white font-bold mb-2">Ofertas e kits</h3><p class="text-gray-400 text-sm">Destaque promoções, kits de churrasco e produtos de maior margem.</p></div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800"><i class="fas fa-truck text-red-500 text-2xl mb-4"></i><h3 class="text-white font-bold mb-2">Entrega ou retirada</h3><p class="text-gray-400 text-sm">O cliente já informa como quer receber antes de chamar o estabelecimento.</p></div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800"><i class="fas fa-chart-line text-red-500 text-2xl mb-4"></i><h3 class="text-white font-bold mb-2">Mais conversão</h3><p class="text-gray-400 text-sm">Transforma a vitrine digital em um caminho direto para o pedido.</p></div>
             </div>
         </div>
     </section>
@@ -650,20 +724,110 @@
 
 
     <script>
-        // Simple mobile menu toggle
-        document.querySelector('button').addEventListener('click', function () {
+        const products = [
+            { id: 1, name: 'Picanha Angus', category: 'Bovinos', price: 89.90, unit: 'kg', image: './img5.webp', badge: 'Mais pedida' },
+            { id: 2, name: 'T-Bone Angus', category: 'Bovinos', price: 69.90, unit: 'kg', image: './img4.webp' },
+            { id: 3, name: 'Alcatra', category: 'Bovinos', price: 49.90, unit: 'kg', image: './img2.webp' },
+            { id: 4, name: 'Fraldinha', category: 'Bovinos', price: 54.90, unit: 'kg', image: './img1.webp' },
+            { id: 5, name: 'Frango temperado', category: 'Aves', price: 24.90, unit: 'un', image: './img6.avif' },
+            { id: 6, name: 'Kit Churrasco Família', category: 'Kits', price: 149.90, unit: 'kit', image: './img3.webp', badge: 'Oferta' }
+        ];
+
+        let cart = [];
+        let activeCategory = 'Todos';
+        const money = value => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        function renderProducts() {
+            const term = document.getElementById('productSearch').value.toLowerCase().trim();
+            const filtered = products.filter(p =>
+                (activeCategory === 'Todos' || p.category === activeCategory) &&
+                p.name.toLowerCase().includes(term)
+            );
+            document.getElementById('emptyProducts').classList.toggle('hidden', filtered.length > 0);
+            document.getElementById('storeProducts').innerHTML = filtered.map(p => `
+                <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-red-900 transition">
+                    <div class="relative">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-44 object-cover">
+                        ${p.badge ? `<span class="absolute top-3 left-3 bg-red-700 text-white text-xs font-bold px-3 py-1 rounded-full">${p.badge}</span>` : ''}
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-xs uppercase tracking-wider">${p.category}</p>
+                        <h3 class="text-white font-bold text-lg mt-1">${p.name}</h3>
+                        <div class="flex items-end justify-between mt-4 gap-3">
+                            <div><strong class="text-red-500 text-xl">${money(p.price)}</strong><span class="text-gray-500 text-sm">/${p.unit}</span></div>
+                            <button onclick="addToCart(${p.id})" class="bg-red-700 hover:bg-red-800 text-white w-10 h-10 rounded-full" aria-label="Adicionar ${p.name}"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>`).join('');
+        }
+
+        function addToCart(id) {
+            const item = cart.find(i => i.id === id);
+            if (item) item.qty += 1;
+            else cart.push({ ...products.find(p => p.id === id), qty: 1 });
+            renderCart();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            renderCart();
+        }
+
+        function renderCart() {
+            const area = document.getElementById('cartItems');
+            const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+            document.getElementById('cartCount').textContent = `(${count})`;
+            document.getElementById('cartTotal').textContent = money(total);
+            document.getElementById('checkoutWhatsapp').disabled = cart.length === 0;
+            if (!cart.length) {
+                area.innerHTML = '<p class="text-gray-500 text-sm">Adicione produtos para montar o pedido.</p>';
+                return;
+            }
+            area.innerHTML = cart.map(i => `
+                <div class="bg-black/50 rounded-lg p-3">
+                    <div class="flex justify-between gap-3"><span class="text-white text-sm font-medium">${i.name}</span><span class="text-gray-300 text-sm">${money(i.price * i.qty)}</span></div>
+                    <div class="flex items-center gap-3 mt-2">
+                        <button onclick="changeQty(${i.id}, -1)" class="w-7 h-7 bg-gray-800 rounded">−</button>
+                        <span class="text-white">${i.qty} ${i.unit}</span>
+                        <button onclick="changeQty(${i.id}, 1)" class="w-7 h-7 bg-red-800 rounded">+</button>
+                    </div>
+                </div>`).join('');
+        }
+
+        document.getElementById('productSearch').addEventListener('input', renderProducts);
+        document.querySelectorAll('.category-btn').forEach(btn => btn.addEventListener('click', () => {
+            activeCategory = btn.dataset.category;
+            document.querySelectorAll('.category-btn').forEach(b => {
+                b.classList.toggle('bg-red-700', b === btn);
+                b.classList.toggle('bg-gray-800', b !== btn);
+            });
+            renderProducts();
+        }));
+
+        document.getElementById('checkoutWhatsapp').addEventListener('click', () => {
+            if (!cart.length) return;
+            const name = document.getElementById('customerName').value.trim() || 'Cliente';
+            const delivery = document.getElementById('deliveryType').value;
+            const notes = document.getElementById('orderNotes').value.trim();
+            const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+            const items = cart.map(i => `• ${i.qty} ${i.unit} - ${i.name} — ${money(i.price * i.qty)}`).join('\n');
+            const message = `Olá! Quero fazer um pedido na Prime Carnes.\n\n*Cliente:* ${name}\n*Pedido:*\n${items}\n\n*Total estimado:* ${money(total)}\n*Recebimento:* ${delivery}${notes ? `\n*Observações:* ${notes}` : ''}\n\nPedido enviado pelo catálogo online.`;
+            window.open('https://wa.me/5541999999999?text=' + encodeURIComponent(message), '_blank');
+        });
+
+        const menuButton = document.querySelector('header button');
+        if (menuButton) menuButton.addEventListener('click', function () {
             const nav = document.querySelector('nav');
             nav.classList.toggle('hidden');
             nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('right-6');
-            nav.classList.toggle('bg-gray-900');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('rounded-lg');
-            nav.classList.toggle('shadow-lg');
         });
+
+        renderProducts();
+        renderCart();
     </script>
 </body>
 
